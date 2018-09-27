@@ -5,7 +5,7 @@ import org.springframework.data.annotation.Id;
 public class Book {
 	
 	@Id
-	private int id;
+	private Integer id;
 	
 	private String author;
 	
@@ -13,6 +13,10 @@ public class Book {
 	
 	public void setAuthor(String author) {
 		this.author = author;
+	}
+	
+	public void setId(Integer id) {
+		this.id = id;
 	}
 	
 	public void setTitle(String title) {
@@ -25,6 +29,10 @@ public class Book {
 	
 	public String getTitle() {
 		return this.title;
+	}
+	
+	public Integer getId() {
+		return this.id;
 	}
 
 }
