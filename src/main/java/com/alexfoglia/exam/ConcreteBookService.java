@@ -1,5 +1,6 @@
 package com.alexfoglia.exam;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +12,7 @@ public class ConcreteBookService implements BookService {
 	private IMongoRepository repo;
 	
 	public Book findOneById(int id) {
-		return repo.findOne(id);
+		return repo.findOne(BigInteger.valueOf(id));
 	}
 
 	@Override
@@ -41,7 +42,7 @@ public class ConcreteBookService implements BookService {
 
 	@Override
 	public void removeBook(int id) {
-		repo.delete(id);
+		repo.delete(BigInteger.valueOf(id));
 	}
 
 	@Override

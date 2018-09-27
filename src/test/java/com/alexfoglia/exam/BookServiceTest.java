@@ -6,6 +6,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.List;
 
@@ -31,17 +32,17 @@ public class BookServiceTest {
 	
 	@Test
 	public void testFindBookByIdWhenEmpty() {
-		when(repo.findOne(0)).thenReturn(null);
+		when(repo.findOne(BigInteger.valueOf(0))).thenReturn(null);
 		assertNull(serv.findOneById(0));
-		verify(repo,times(1)).findOne(0);
+		verify(repo,times(1)).findOne(BigInteger.valueOf(0));
 	}
 	
 	@Test
 	public void testFindBookByIdWhenItExists() {
 		Book b = new Book();
-		when(repo.findOne(0)).thenReturn(b);
+		when(repo.findOne(BigInteger.valueOf(0))).thenReturn(b);
 		assertEquals(b,serv.findOneById(0));
-		verify(repo,times(1)).findOne(0);
+		verify(repo,times(1)).findOne(BigInteger.valueOf(0));
 	}
 	
 	@Test
@@ -122,7 +123,7 @@ public class BookServiceTest {
 	@Test
 	public void testRemoveBook() {
 		serv.removeBook(0);
-		verify(repo,times(1)).delete(0);
+		verify(repo,times(1)).delete(BigInteger.valueOf(0));
 	}
 	
 	@Test

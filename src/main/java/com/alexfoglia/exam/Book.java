@@ -1,11 +1,13 @@
 package com.alexfoglia.exam;
 
+import java.math.BigInteger;
+
 import org.springframework.data.annotation.Id;
 
 public class Book {
 	
 	@Id
-	private Integer id;
+	private BigInteger id;
 	
 	private String author;
 	
@@ -15,7 +17,7 @@ public class Book {
 		this.author = author;
 	}
 	
-	public void setId(Integer id) {
+	public void setId(BigInteger id) {
 		this.id = id;
 	}
 	
@@ -31,7 +33,7 @@ public class Book {
 		return this.title;
 	}
 	
-	public Integer getId() {
+	public BigInteger getId() {
 		return this.id;
 	}
 
