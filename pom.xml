@@ -27,7 +27,8 @@
 		<sonar.language>java</sonar.language>
 		<sonar.jacoco.reportPaths>${jacoco.data.file}</sonar.jacoco.reportPaths>
 		<sonar.coverage.exclusions>
-			**/AttswExamApplication.*
+			**/AttswExamApplication.*,
+			**/Book.*
 		</sonar.coverage.exclusions>
 	</properties>
 
@@ -130,6 +131,7 @@
 						<configuration>
 							<excludes>
 								<exclude>**/AttswExamApplication.*</exclude>
+								<exclude>**/Book.*</exclude>
 							</excludes>
 						</configuration>
 						<executions>
