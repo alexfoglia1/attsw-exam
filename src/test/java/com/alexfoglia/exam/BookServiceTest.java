@@ -134,7 +134,6 @@ public class BookServiceTest {
 	private void assertListEquality(List<Book> expected, List<Book> actual) {
 		assertEquals(expected.size(),actual.size());
 		assertSameElements(actual,expected);
-		
 	}
 	
 	private void assertSameElements(List<Book> actual, List<Book> expected) {
@@ -142,7 +141,6 @@ public class BookServiceTest {
 		for(int i=0; i<size; i++) {
 			assertEquals(actual.get(i),expected.get(i));
 		}
-		
 	}
 
 }
