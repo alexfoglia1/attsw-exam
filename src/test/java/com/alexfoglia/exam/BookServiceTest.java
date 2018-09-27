@@ -119,6 +119,18 @@ public class BookServiceTest {
 		assertEquals("foo",added.getTitle());
 	}
 	
+	@Test
+	public void testRemoveBook() {
+		serv.removeBook(0);
+		verify(repo,times(1)).delete(0);
+	}
+	
+	@Test
+	public void testRemoveAll() {
+		serv.removeAll();
+		verify(repo,times(1)).deleteAll();
+	}
+	
 	private void assertListEquality(List<Book> expected, List<Book> actual) {
 		assertEquals(expected.size(),actual.size());
 		assertSameElements(actual,expected);

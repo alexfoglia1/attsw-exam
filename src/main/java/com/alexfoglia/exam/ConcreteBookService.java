@@ -41,14 +41,12 @@ public class ConcreteBookService implements BookService {
 
 	@Override
 	public void removeBook(int id) {
-		// TODO Auto-generated method stub
-		
+		repo.delete(id);
 	}
 
 	@Override
 	public void removeAll() {
-		// TODO Auto-generated method stub
-		
+		repo.deleteAll();
 	}
 
 }
