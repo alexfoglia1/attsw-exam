@@ -11,6 +11,8 @@ import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -23,6 +25,9 @@ public class BookServiceTest {
 	
 	@InjectMocks
 	private ConcreteBookService serv;
+	
+	@Captor
+	private ArgumentCaptor<Book> captor;
 	
 	@Test
 	public void testFindBookByIdWhenEmpty() {
@@ -62,6 +67,56 @@ public class BookServiceTest {
 		List<Book> actual = serv.findAll();
 		verify(repo,times(1)).findAll();
 		assertListEquality(expected, actual);
+	}
+	
+	@Test
+	public void testFindAllByAuthorWhenEmpty() {
+		when(repo.findAll()).thenReturn(Arrays.asList());
+		assertEquals(0,serv.findAllByAuthor("test").size());
+		verify(repo,times(1)).findAll();
+	}
+	
+	@Test
+	public void testFindAllByAuthorWhenThatAuthorDoesNotExists() {
+		Book b = new Book();
+		b.setAuthor("foo");
+		when(repo.findAll()).thenReturn(Arrays.asList(b));
+		assertEquals(0,serv.findAllByAuthor("test").size());
+		verify(repo,times(1)).findAll();
+	}
+	@Test
+	public void testFindAllByAuthorWhenOneBookExists() {
+		Book b = new Book();
+		b.setAuthor("test");
+		List<Book> expected = Arrays.asList(b);
+		when(repo.findAll()).thenReturn(expected);
+		List<Book> actual = serv.findAllByAuthor("test");
+		verify(repo,times(1)).findAll();
+		assertListEquality(expected, actual);
+	}
+
+	@Test
+	public void testFindAllByAuthorWhenMoreBookExists() {
+		Book b1 = new Book();
+		Book b2 = new Book();
+		Book b3 = new Book();
+		b1.setAuthor("test");
+		b2.setAuthor("test");
+		b3.setAuthor("foo");
+		List<Book> expected = Arrays.asList(b1,b2);
+		when(repo.findAll()).thenReturn(Arrays.asList(b1,b2,b3));
+		List<Book> actual = serv.findAllByAuthor("test");
+		verify(repo,times(1)).findAll();
+		assertListEquality(expected, actual);
+	}
+	
+	@Test
+	public void testAddBook() {
+		serv.addBook("test", "foo");
+		verify(repo,times(1)).save(captor.capture());
+		Book added = captor.getValue();
+		assertEquals("test",added.getAuthor());
+		assertEquals("foo",added.getTitle());
 	}
 	
 	private void assertListEquality(List<Book> expected, List<Book> actual) {
